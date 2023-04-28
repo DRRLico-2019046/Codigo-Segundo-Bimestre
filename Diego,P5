@@ -1,0 +1,58 @@
+/*
+   Fundacion Kinal
+   Centro educativo tecnico laboral Kinal
+   Quinto perito
+   Quinto electronica
+   Codigo Tecnico: EB5AM
+   Curso: Taller de electronica digital y reparacion de computadoras I
+   Diego Rodolfo Revolorio Lico 
+   2019046
+  Sección: A
+  
+*/
+int Trig = 2;
+int Echo = 3;
+int Buzzer = 11;
+int distancia;
+int c = 261;
+int d = 294;
+int e = 329;
+int f = 349;
+int g = 391;
+int a = 440;
+int b = 466;
+void setup() {
+  Serial.begin(9600);
+  pinMode(Trig, OUTPUT);
+  pinMode(Echo, INPUT);
+  pinMode(Buzzer, OUTPUT);
+}
+void loop() {
+  distancia = DieRs();
+  Serial.println(distancia);
+if (distancia >= 2 && distancia <= 5) {  // F (Fa)
+tone(Buzzer, f);
+} else if (distancia >= 6 && distancia <= 11) {  // G (Sol)
+tone(Buzzer, g);
+} else if (distancia >= 12 && distancia <= 17) {  // A (La)
+tone(Buzzer, a);
+} else if (distancia >= 18 && distancia <= 23) {  // B (Si)
+tone(Buzzer, b);
+} else if (distancia >= 24 && distancia <= 29) {  // C (Do)
+tone(Buzzer, c);
+} else if (distancia >= 30 && distancia <= 35) {  // D (Re)
+tone(Buzzer, d);
+} else if (distancia >= 36 && distancia <= 41) {  // E (Mi)
+tone(Buzzer, e);
+} else {
+noTone(Buzzer);  // Detener el sonido si la distancia no está en ninguno de los rangos especificados
+      }
+    }
+int DieRs() {  // Funcion para hacer funcionar el ultrasonico y retornar el valor de distancia
+  digitalWrite(Trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(Trig, LOW);
+  int Tiempo = pulseIn(Echo, HIGH);
+  int Distancia = Tiempo / 58.2;  // Calibración para obtener la distancia en centímetros
+  return Distancia;
+}
