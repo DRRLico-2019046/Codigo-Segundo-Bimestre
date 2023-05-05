@@ -1,0 +1,135 @@
+ /*
+   Fundacion Kinal
+   Centro educativo tecnico laboral Kinal
+   Quinto perito
+   Quinto electronica
+   Codigo Tecnico: EB5AM
+   Curso: Taller de electronica digital y reparacion de computadoras I
+   Diego Rodolfo Revolorio Lico 
+   2019046
+*/
+  #include <Wire.h>
+  #include <LiquidCrystal_I2C.h>
+  
+  #define trigger 2  
+  #define echo    3
+  
+  byte cuadro_lleno[] = {
+    B11111,
+    B11111,
+    B11111,
+    B11111,
+    B11111,
+    B11111,
+    B11111,
+    B11111
+  };
+  
+  LiquidCrystal_I2C DROS_LCD(0x27,16,2);
+  void setup() {
+    DROS_LCD.init();
+    DROS_LCD.backlight();
+    pinMode(trigger, OUTPUT);
+    pinMode(echo,INPUT);
+    DROS_LCD.createChar(1,cuadro_lleno);
+  
+  }
+  
+  void loop() {
+    int Distancubia=dis();
+      if(Distancubia >=50){
+        DROS_LCD.clear();
+        DROS_LCD.setCursor(7,0);
+        DROS_LCD.print("50");  
+        DROS_LCD.setCursor(6,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(5,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(4,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(9,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(10,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(11,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(6,1);
+        DROS_LCD.print("Libre");
+      }
+      if(Distancubia >=30 && Distancubia <=35){
+        DROS_LCD.clear();
+        DROS_LCD.setCursor(7,0);
+        DROS_LCD.print("30");
+        DROS_LCD.setCursor(6,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(5,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(4,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(3,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(2,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(9,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(10,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(11,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(12,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(13,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(5,1);
+        DROS_LCD.print("Cuidado");
+      }
+       if(Distancubia >=10 && Distancubia <=15){
+        DROS_LCD.clear();
+        DROS_LCD.setCursor(7,0);
+        DROS_LCD.print("10");
+        DROS_LCD.setCursor(6,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(5,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(4,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(3,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(2,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(1,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(0,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(9,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(10,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(11,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(12,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(13,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(14,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(15,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(16,0);
+        DROS_LCD.write(1);
+        DROS_LCD.setCursor(6,1);
+        DROS_LCD.print("Alto");
+      }
+  }
+  
+  int dis(){
+     long sensor, distancia;
+      delay(500);
+      digitalWrite(trigger, HIGH);
+      delayMicroseconds(2);
+      digitalWrite (trigger, LOW);
+      delayMicroseconds(5);
+      sensor = pulseIn(echo, HIGH);
+      distancia = sensor/59;
+      return distancia;
+  }
