@@ -1,0 +1,66 @@
+ /*
+   Fundacion Kinal
+   Centro educativo tecnico laboral Kinal
+   Quinto perito
+   Quinto electronica
+   Codigo Tecnico: EB5AM
+   Curso: Taller de electronica digital y reparacion de computadoras I
+   Diego Rodolfo Revolorio Lico 
+   2019046
+*/
+#include <DallasTemperature.h>
+
+#define LEDR 3
+#define LEDB 4
+#define LEDY 5
+//Constructores
+OneWire ourWire(2);
+DallasTemperature sensor(&ourWire);
+LiquidCrystal_I2C DROS_LCD(0x27,16,2);
+
+void setup() {
+  delay(1000);
+  DROS_LCD.init();
+  DROS_LCD.backlight();   //Inicio la comunicacion serial
+
+}
+
+void loop() {
+  sensor.requestTemperatures();   //Se envía el comando para leer la temperatura
+  float temperatura = sensor.getTempCByIndex(0); //Se obtiene la temperatura en ºC
+  float temperatura1 = sensor.getTempFByIndex(0); //Se obtiene la temperatura en ºF
+
+  DROS_LCD.setCursor(0,0);
+  DROS_LCD.print("muestra: ");
+  DROS_LCD.setCursor(0,1);
+  DROS_LCD.print(temperatura);
+  DROS_LCD.println("C");
+  DROS_LCD.setCursor(6,1);
+  DROS_LCD.print(" ");
+  DROS_LCD.setCursor(7,1);
+  DROS_LCD.print(" ");
+  DROS_LCD.setCursor(8,1);
+  DROS_LCD.print(" ");
+  DROS_LCD.setCursor(9,1);
+  DROS_LCD.print(temperatura1);
+  DROS_LCD.println("F");
+  DROS_LCD.setCursor(15,1);
+  DROS_LCD.print("  ");
+  delay(100);
+
+  if (temperatura >= 30) {
+    digitalWrite(LEDR, HIGH);
+    digitalWrite(LEDB, LOW);
+    digitalWrite(LEDY, LOW);
+  }
+  if (temperatura <= 15) {
+    digitalWrite(LEDR, LOW);
+    digitalWrite(LEDB, HIGH);
+    digitalWrite(LEDY, LOW);
+  }
+  if (temperatura > 15 && temperatura < 30) {
+    digitalWrite(LEDR, LOW);
+    digitalWrite(LEDB, LOW);
+    digitalWrite(LEDY, HIGH);
+  }
+}
