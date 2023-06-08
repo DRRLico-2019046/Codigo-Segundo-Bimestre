@@ -1,0 +1,1056 @@
+/*
+ * FUNDACIÓN KINAL
+ * CENTRO EDUCATIVO TECNICO LABORAL KINAL
+ * Electronica
+ * Grado: Quinto 
+ * Sección: A
+ * CURSO: Taller de electronica digital y reparacion de computadoras I
+ * Diego Rodolfo Revolorio Lico 
+ * 2019046
+ * Proyecto 1
+ */
+//definición de los pines 
+#define btn_rising  2    
+#define btn_falling 3 
+#define Adisplay1 4
+#define Bdisplay1 5
+#define Cdisplay1 6
+#define Ddisplay1 7
+#define Edisplay1 8
+#define Fdisplay1 9
+#define Gdisplay1 10
+#define Adisplay2 11
+#define Bdisplay2 12
+#define Cdisplay2 13
+#define Ddisplay2 14
+#define Edisplay2 15
+#define Fdisplay2 16
+#define Gdisplay2 17
+void funcion_ISR_falling(void);
+void funcion_ISR_rising(void);
+volatile static bool f_print=false; // variable para mostrar en texto en el loop
+volatile static char i=0; // variable que cuenta de 0 - 255;
+void setup() {
+  Serial.begin(19200); //Inicio la comunicación serial
+  pinMode(btn_rising, INPUT);  //pin 2 como entrada
+  pinMode(btn_falling, INPUT); //pin 3 como entrada
+  pinMode(Adisplay1, OUTPUT);
+  pinMode(Bdisplay1, OUTPUT);
+  pinMode(Cdisplay1, OUTPUT);
+  pinMode(Ddisplay1, OUTPUT);
+  pinMode(Edisplay1, OUTPUT);
+  pinMode(Fdisplay1, OUTPUT);
+  pinMode(Gdisplay1, OUTPUT);
+  pinMode(Adisplay2, OUTPUT);
+  pinMode(Bdisplay2, OUTPUT);
+  pinMode(Cdisplay2, OUTPUT);
+  pinMode(Ddisplay2, OUTPUT);
+  pinMode(Edisplay2, OUTPUT);
+  pinMode(Fdisplay2, OUTPUT);
+  pinMode(Gdisplay2, OUTPUT);
+  attachInterrupt(digitalPinToInterrupt(btn_rising),funcion_ISR_rising,RISING);   //Anclar la interrupción del pin 2 a una funcion de ISR, disparada por el flanco ascendente
+  attachInterrupt(digitalPinToInterrupt(btn_falling),funcion_ISR_falling,FALLING); //Anclar la interrupción del pin 3 a una funcion de ISR, disparada por el flanco descendente
+}
+void loop() {
+   numeros_0_al_50 ();
+
+if(f_print)
+{
+  f_print = false; //limpio la variable
+  Serial.println(i); //imprimo el valor de I
+}
+  if(i<50) 
+{
+  i==0;
+}
+  if(i>0)
+{
+  i==50;
+}
+if(i>50)
+  {
+  i=0;
+  }
+if(i<0)
+  i=50;
+}
+//Funciones de ISR
+void funcion_ISR_rising(void)
+{
+  f_print = true;
+  //aumentar el valor de la variable
+  i++; 
+  //Serial.println(i);
+}
+void funcion_ISR_falling(void)
+{
+  f_print = true;
+  //disminuir el valor de una variable
+  i--;
+  //Serial.println(i);
+}
+//seleccionamos los numeros del 0-50
+
+void numeros_0_al_50 ()
+{  
+	if(i==0)
+  {   
+ //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, LOW);
+}
+if(i==1)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  
+  digitalWrite(Adisplay2, LOW);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, LOW);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, LOW);
+}
+if(i==2)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, LOW);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==3)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==4)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  digitalWrite(Adisplay2, LOW);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, LOW);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==5)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, LOW);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==6)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, LOW);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==7)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, LOW);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, LOW);
+}
+if(i==8)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==9)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==10)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, LOW);
+}
+if(i==11)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  digitalWrite(Adisplay2, LOW);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, LOW);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, LOW);
+}
+if(i==12)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, LOW);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==13)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==14)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  digitalWrite(Adisplay2, LOW);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, LOW);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==15)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, LOW);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==16)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, LOW);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==17)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, LOW);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, LOW);
+}
+if(i==18)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==19)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, LOW);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, LOW);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==20)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, LOW);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, LOW);
+}
+if(i==21)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, LOW);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, LOW);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, LOW);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, LOW);
+}
+if(i==22)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, LOW);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, LOW);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==23)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, LOW);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==24)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, LOW);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, LOW);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, LOW);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==25)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, LOW);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, LOW);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==26)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, LOW);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, LOW);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==27)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, LOW);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, LOW);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, LOW);
+}
+if(i==28)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, LOW);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==29)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, LOW);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, HIGH);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2;
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, LOW);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==30)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, LOW);
+}
+if(i==31)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, LOW);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, LOW);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, LOW);
+}
+if(i==32)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, LOW);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==33)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2;
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==34)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, LOW);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, LOW);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==35) 
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, LOW);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==36)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2;;
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, LOW);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==37)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, LOW);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, LOW);
+}
+if(i==38){
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==39)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, LOW);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, LOW);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==40){
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, LOW);
+}
+if(i==41){
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, LOW);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, LOW);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, LOW);
+}
+if(i==42)
+{
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, LOW);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==43){
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==44){
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, LOW);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, LOW);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==45){
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, LOW);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==46){
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, LOW);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==47){
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, LOW);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, LOW);
+  digitalWrite(Gdisplay2, LOW);
+}
+if(i==48){
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==49){
+  //Display No. 1
+  digitalWrite(Adisplay1, LOW);
+  digitalWrite(Bdisplay1, HIGH);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, LOW);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, LOW);
+  digitalWrite(Edisplay2, LOW);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, HIGH);
+}
+if(i==50){
+  //Display No. 1
+  digitalWrite(Adisplay1, HIGH);
+  digitalWrite(Bdisplay1, LOW);
+  digitalWrite(Cdisplay1, HIGH);
+  digitalWrite(Ddisplay1, HIGH);
+  digitalWrite(Edisplay1, LOW);
+  digitalWrite(Fdisplay1, HIGH);
+  digitalWrite(Gdisplay1, HIGH);
+  //Display No. 2
+  digitalWrite(Adisplay2, HIGH);
+  digitalWrite(Bdisplay2, HIGH);
+  digitalWrite(Cdisplay2, HIGH);
+  digitalWrite(Ddisplay2, HIGH);
+  digitalWrite(Edisplay2, HIGH);
+  digitalWrite(Fdisplay2, HIGH);
+  digitalWrite(Gdisplay2, LOW);
+}
+}
