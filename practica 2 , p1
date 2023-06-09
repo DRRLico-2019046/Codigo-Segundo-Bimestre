@@ -1,0 +1,22 @@
+/*
+ * FUNDACIÓN KINAL
+ * CENTRO EDUCATIVO TECNICO LABORAL KINAL
+ * Electronica
+ * Grado: Quinto 
+ * Sección: A
+ * CURSO: Taller de electronica digital y reparacion de computadoras I
+ * Diego Rodolfo Revolorio Lico 
+ * 2019046
+ * Proyecto 2
+ */
+int LED=3; // Salida PWM a utilizar con el LED.
+int ROSAROV;
+void setup() {
+  // Bloque de código de configuración.
+  pinMode(LED, OUTPUT);
+  pinMode(A0, INPUT);
+}
+void loop() {
+  ROSAROV=analogRead(A0)/4;
+  analogWrite(LED,ROSAROV);
+}
