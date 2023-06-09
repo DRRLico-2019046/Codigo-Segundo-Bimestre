@@ -1,0 +1,69 @@
+/*
+ * FUNDACIÓN KINAL
+ * CENTRO EDUCATIVO TECNICO LABORAL KINAL
+ * Electronica
+ * Grado: Quinto 
+ * Sección: A
+ * CURSO: Taller de electronica digital y reparacion de computadoras I
+ * Diego Rodolfo Revolorio Lico 
+ * 2019046
+ * Proyecto 1
+ */
+ 
+  #include <OneWire.h>
+  #include <DallasTemperature.h>
+  #include <Ticker.h>
+
+#define boton 2
+#define PinTemp 6
+
+void temperatus(void);
+Ticker tompos(temperatus, 3000);
+void Boton(void);
+Ticker button(Boton, 6000);
+OneWire oneWireObjeto(6);
+DallasTemperature Temp(&oneWireObjeto);
+
+
+
+void setup() {
+  
+  
+  Serial.begin(9600);
+  Temp.begin();
+  tompos.start();
+  button.start();
+  pinMode(boton, INPUT);
+}
+
+void loop() {
+  tompos.update();
+  button.update();
+}
+
+
+
+void temperatus(void) {
+ 
+  
+  Temp.requestTemperatures();
+  int temperatus = Temp.getTempCByIndex(0);
+  Serial.print("Temperatus vitae humanae ");
+  Serial.print(temperatus);
+  Serial.println("C");
+}
+
+void Boton(void) {
+  delay(10);
+  
+  
+  if (digitalRead(boton) == HIGH) {
+    
+    Serial.println("button pressi");
+  }
+ 
+  else {
+   
+    Serial.println("Button non pressed currere");
+  }
+}
